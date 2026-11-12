@@ -69,7 +69,7 @@ button:focus-visible{outline:3px solid #fff;outline-offset:3px}
   <button id="music" class="music-control" type="button" aria-pressed="false">Play Vahini's song ♫</button>
   <p id="song-status" class="song-status" aria-live="polite">A birthday song for Vahini</p>
 </div>
-<audio id="custom-audio" src="Vahini.mp3" preload="metadata" loop type="audio/wav"></audio>
+<audio id="custom-audio" src="Vahini.mp3" preload="metadata" loop type="audio/mpeg"></audio>
 
 <section id="s1">
   <button class="gift" id="gift" aria-label="Open your surprise"><i class="box"></i><i class="rib"></i><i class="lid"></i><i class="bow"></i></button>
@@ -170,14 +170,14 @@ async function startSong(){
   songPlaying=true;songButton.textContent='Stop the song ■';songButton.setAttribute('aria-pressed','true');
   songStatus.textContent='Now playing Vahini’s birthday song 🎵';
  }catch(error){
-  songStatus.textContent='Could not play the song. Check that birthday-song.mp3 is beside this page.';
+  songStatus.textContent='Could not play the song. Check that Vahini.mp3 is beside this page.';
   console.error('Unable to play the birthday song:',error);
  }
 }
 songButton.onclick=()=>songPlaying?stopSong():startSong();
 customAudio.onerror=()=>{
- songStatus.textContent='Could not load birthday-song.wav. Keep it beside birtday.html.';
- console.error('Could not load the birthday song at birthday-song.wav.');
+ songStatus.textContent='Could not load Vahini.mp3. Keep it beside birtday.html.';
+ console.error('Could not load the birthday song at Vahini.mp3.');
 };
 // flow
 function go(from,to){$(from).classList.add('hidden');$(to).classList.remove('hidden');scrollTo(0,0)}
