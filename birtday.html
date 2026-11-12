@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday, Vahini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--night:#1d0b2e;--plum:#3b1450;--marigold:#ffb627;--saffron:#ff7a1a;--rose:#ff5d8f;--leaf:#4fb477;--text:#fff4e0;
+color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%;background:var(--night);color:var(--text);font-family:'Baloo 2','Noto Sans Devanagari',system-ui,sans-serif}
+body{background:radial-gradient(ellipse at 70% 12%,#5a1f6e 0%,var(--plum) 35%,var(--night) 80%) fixed;overflow-x:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.stars{position:fixed;inset:0;z-index:0}
+.stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.7;animation:tw 3s infinite ease-in-out}
+@keyframes tw{50%{opacity:.1;transform:scale(.6)}}
+.moon{position:fixed;top:7%;right:10%;width:70px;height:70px;border-radius:50%;background:#fff1c9;box-shadow:0 0 60px 20px rgba(255,214,120,.35);z-index:0}
+.hill{position:fixed;left:0;right:0;bottom:0;height:34vh;z-index:1;pointer-events:none}
+section{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 20px 28vh}
+.hidden{display:none}
+h1{font-size:clamp(2.2rem,9vw,4.4rem);font-weight:800;line-height:1.05;letter-spacing:-.01em}
+h1 span{display:block;color:var(--marigold);text-shadow:0 0 28px rgba(255,182,39,.55)}
+p.sub{margin-top:10px;font-size:1.15rem;opacity:.9;max-width:30ch}
+button{font:inherit;font-weight:700;font-size:1.15rem;border:0;border-radius:999px;padding:14px 30px;margin-top:22px;cursor:pointer;color:#3a1200;background:linear-gradient(135deg,var(--marigold),var(--saffron));box-shadow:0 8px 30px rgba(255,122,26,.45);transition:transform .15s}
+button:hover{transform:scale(1.06)}button:active{transform:scale(.96)}
+button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.music-controls{position:fixed;top:max(12px,env(safe-area-inset-top));left:50%;z-index:6;display:grid;justify-items:center;gap:7px;width:min(94vw,340px);transform:translateX(-50%)}
+.music-controls button{margin:0;padding:9px 16px;font-size:1rem}
+.music-control{color:var(--text);background:rgba(59,20,80,.92);border:1px solid rgba(255,214,120,.55);box-shadow:0 6px 24px rgba(0,0,0,.24);white-space:nowrap;backdrop-filter:blur(8px)}
+.song-status{max-width:100%;overflow:hidden;color:var(--text);font-size:.85rem;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 1px 5px var(--night)}
+/* gift */
+.gift{width:170px;height:170px;position:relative;cursor:pointer;animation:bob 2.2s ease-in-out infinite;background:none;box-shadow:none;padding:0;margin:0 0 6px;border-radius:0}
+.gift:hover{transform:none}
+@keyframes bob{50%{transform:translateY(-12px) rotate(2deg)}}
+.gift .box{position:absolute;bottom:0;left:10px;right:10px;height:105px;background:var(--rose);border-radius:8px;box-shadow:0 0 60px rgba(255,93,143,.55)}
+.gift .lid{position:absolute;bottom:98px;left:2px;right:2px;height:34px;background:#ff86ad;border-radius:8px;transition:transform .6s}
+.gift .rib{position:absolute;bottom:0;left:calc(50% - 14px);width:28px;height:132px;background:var(--marigold)}
+.gift .bow{position:absolute;bottom:128px;left:calc(50% - 30px);width:60px;height:34px;border:8px solid var(--marigold);border-radius:50% 50% 8px 8px}
+.gift.open .lid,.gift.open .bow{transform:translateY(-70px) rotate(-18deg);opacity:0;transition:all .7s}
+/* toran */
+.toran{position:fixed;top:0;left:0;right:0;height:84px;z-index:4;pointer-events:none;transform:translateY(-100%);transition:transform 1.2s cubic-bezier(.3,1.5,.5,1)}
+.toran.on{transform:none}
+.toran svg{width:100%;height:100%;transform-origin:top;animation:sway 4s ease-in-out infinite}
+@keyframes sway{50%{transform:skewX(2deg)}}
+/* cake */
+.cake{width:min(300px,78vw);margin-top:14px}
+.fl{transform-origin:center bottom;animation:fk .35s infinite alternate}
+@keyframes fk{to{transform:scale(1.15,.9) rotate(4deg)}}
+.out .fl{animation:none;opacity:0;transition:opacity .3s}
+.smoke{opacity:0}.out .smoke{opacity:.7;animation:sm 2s forwards}
+@keyframes sm{to{transform:translateY(-30px);opacity:0}}
+/* wishes */
+.wish{margin:14px auto 0;max-width:34ch;padding:20px 22px;border-radius:22px;background:linear-gradient(160deg,rgba(255,182,39,.16),rgba(255,93,143,.16));border:1px solid rgba(255,182,39,.45);font-size:1.25rem;font-weight:500;line-height:1.35;animation:pop .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{from{transform:scale(.3) rotate(-6deg);opacity:0}}
+.heart{font-size:4.5rem;animation:beat 1.1s infinite;filter:drop-shadow(0 0 22px var(--rose))}
+@keyframes beat{15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.18)}}
+.from{margin-top:14px;font-size:1.05rem;opacity:.9}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div><div class="moon"></div>
+<svg class="hill" viewBox="0 0 400 140" preserveAspectRatio="none"><path d="M0 140V95C40 90 70 60 120 38 165 18 200 30 245 55 290 78 340 85 400 80V140Z" fill="#14081f"/><path d="M0 140V118C70 108 130 96 200 108 280 121 340 112 400 104V140Z" fill="#0c0414"/></svg>
+<div class="toran" id="toran"><svg viewBox="0 0 400 84" preserveAspectRatio="none" id="garland"></svg></div>
+<canvas id="c"></canvas>
+<div class="music-controls" aria-label="Birthday music">
+  <button id="music" class="music-control" type="button" aria-pressed="false">Play Vahini's song ♫</button>
+  <p id="song-status" class="song-status" aria-live="polite">A birthday song for Vahini</p>
+</div>
+<audio id="custom-audio" src="Vahini.mp3" preload="metadata" loop type="audio/wav"></audio>
+
+<section id="s1">
+  <button class="gift" id="gift" aria-label="Open your surprise"><i class="box"></i><i class="rib"></i><i class="lid"></i><i class="bow"></i></button>
+  <h1>ooo maji sonpapdiii,<span>Open It</span></h1>
+  <button id="open">Tap to open</button>
+</section>
+
+<section id="s2" class="hidden">
+  <h1>Happy Birthday,<span>Vahini Saheb ! 🎉</span></h1>
+  <p class="sub">Make a wish, then blow out the candles.</p>
+  <svg class="cake" id="cake" viewBox="0 0 300 260" aria-hidden="true">
+    <ellipse cx="150" cy="238" rx="140" ry="16" fill="#0c0414" opacity=".6"/>
+    <rect x="30" y="160" width="240" height="72" rx="14" fill="#ff86ad"/>
+    <rect x="62" y="104" width="176" height="62" rx="12" fill="#ffd36b"/>
+    <path d="M62 120q14 22 29 0t29 0 29 0 29 0 29 0v-8H62z" fill="#fff4e0"/>
+    <path d="M30 176q16 24 33 0t33 0 33 0 33 0 33 0 33 0v-8H30z" fill="#fff4e0"/>
+    <circle cx="70" cy="205" r="7" fill="#ffb627"/><circle cx="150" cy="212" r="7" fill="#ffb627"/><circle cx="230" cy="205" r="7" fill="#ffb627"/>
+    <g fill="#4fb477"><rect x="103" y="66" width="9" height="40" rx="3"/><rect x="146" y="66" width="9" height="40" rx="3"/><rect x="189" y="66" width="9" height="40" rx="3"/></g>
+    <g class="fl"><path d="M107.500 30c9 12 9 24 0 32-9-8-9-20 0-32z" fill="#ffb627"/></g>
+    <g class="fl" style="animation-delay:.1s"><path d="M150.500 30c9 12 9 24 0 32-9-8-9-20 0-32z" fill="#ffb627"/></g>
+    <g class="fl" style="animation-delay:.2s"><path d="M193.500 30c9 12 9 24 0 32-9-8-9-20 0-32z" fill="#ffb627"/></g>
+    <g class="smoke" fill="#fff"><circle cx="107" cy="50" r="5"/><circle cx="150" cy="50" r="5"/><circle cx="193" cy="50" r="5"/></g>
+  </svg>
+  <button id="blow">Blow the candles 🕯️</button>
+</section>
+
+<section id="s3" class="hidden">
+  <p class="sub" style="margin:0 0 6px">A few things we want you to know…</p>
+  <div id="wishes"></div>
+  <button id="next">Next wish ♥</button>
+  <div id="end" class="hidden">
+    <div class="heart">❤️</div>
+    <h1 style="margin-top:8px">We love you,<span>Vahini!</span></h1>
+    <p class="from">With all our love — from Me and the whole our family 🌼</p>
+    <button id="again">Watch again</button>
+  </div>
+</section>
+
+<script>
+const NAME='Vahini';
+const WISHES=[
+ 'You make our home warmer, brighter and happier just by being in it. 🏡',
+ 'Your smile is the most beautiful thing on this farm — even prettier than the marigolds. 🌼',
+ 'Thank you for every meal, every hug and every day you take care of all of us. 🤗',
+ 'May this year bring you endless joy, good health and every dream coming true. ✨',
+ 'फुलांसारखं सुंदर असो तुमचं आयुष्य, आनंदाने भरलेला असो प्रत्येक क्षण,स्वप्नांना मिळो यशाची नवी भरारी,आणि सुखाची लाभो सदैव साथ!',
+ 'तुमच्या आयुष्यात येवो आनंदाची नवी लाट,सुख-समृद्धीची लाभो सदैव साथ,संपन्नतेची लाभो नवी भरारी,आणि यशाची मिळो नवी गाथा!',
+'तुमचं हसू असंच कायम खुलत राहो! 🌸',
+'Queen of our family! 👑❤️',
+'सुंदर व्यक्तिमत्त्व, त्याहून सुंदर मन! 🌷',
+'माझी Favourite वहिनी! 💕',
+'Special person, special day! 🎂',
+'लाखात एक आमची वहिनी! ❤️',
+'Always shine, dear Vahini! ✨',
+'नातं खास, व्यक्ती त्याहून खास! 🥰',
+'Keep smiling, keep shining! 💖',
+'आमच्या आनंदाचं एक सुंदर कारण! 🌸',
+'माझी लाडक्या वहिनीला खूप सारं प्रेम! ❤️',
+'कायम अशीच सुंदर आणि हसतमुख राहा! ❤️',
+];
+const $=id=>document.getElementById(id);
+// stars
+const st=$('stars');for(let i=0;i<70;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*70+'%';s.style.animationDelay=Math.random()*3+'s';st.appendChild(s)}
+// toran garland
+(function(){let h='<path d="M0 6Q100 62 200 6T400 6" fill="none" stroke="#4fb477" stroke-width="3"/>';
+for(let i=0;i<=20;i++){const x=i*20,y=6+Math.sin(i*Math.PI/5)*0;const t=i/20;const yy=6+Math.sin(t*Math.PI*2)*0;
+const cy=6+(Math.abs(Math.sin(t*Math.PI*2))*0)+ (t<.5?Math.sin(t*Math.PI*2)*27*(1):Math.sin((t-.5)*Math.PI*2)*27)+0;
+h+='<circle cx="'+x+'" cy="'+(cy+8)+'" r="8" fill="'+(i%2?'#ffb627':'#ff7a1a')+'"/><circle cx="'+x+'" cy="'+(cy+8)+'" r="3" fill="#fff4e0" opacity=".6"/>'}
+$('garland').innerHTML=h})();
+// particles
+const cv=$('c'),cx=cv.getContext('2d');let P=[],rain=false;
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function size(){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio}size();addEventListener('resize',size);
+const COL=['#ffb627','#ff7a1a','#ff5d8f','#fff4e0','#4fb477','#ffd36b'];
+function add(x,y,burst){const a=Math.random()*Math.PI*2,v=burst?4+Math.random()*9:0;
+P.push({x,y,vx:Math.cos(a)*v+(Math.random()-.5),vy:burst?Math.sin(a)*v-4:1+Math.random()*1.5,r:Math.random()*6.28,vr:(Math.random()-.5)*.2,s:5+Math.random()*7,c:COL[Math.random()*COL.length|0],heart:Math.random()<.18,burst})}
+function burst(n){const x=innerWidth/2,y=innerHeight*.45;for(let i=0;i<(RM?20:n);i++)add(x,y,true)}
+function loop(){cx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);cx.clearRect(0,0,innerWidth,innerHeight);
+if(rain&&!RM&&Math.random()<.25)add(Math.random()*innerWidth,-10,false);
+P=P.filter(p=>p.y<innerHeight+20);
+for(const p of P){p.x+=p.vx+(p.burst?0:Math.sin(p.y/40+p.r)*.8);p.y+=p.vy;if(p.burst){p.vy+=.18;p.vx*=.99}p.r+=p.vr;
+cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;
+if(p.heart){cx.font=(p.s*2.4)+'px serif';cx.fillText('♥',-p.s,p.s)}else{cx.beginPath();cx.ellipse(0,0,p.s,p.s*.5,0,0,6.28);cx.fill()}
+cx.restore()}
+requestAnimationFrame(loop)}loop();
+// Play the birthday MP3 stored beside this HTML file.
+let songPlaying=false;
+const songButton=$('music');
+const customAudio=$('custom-audio');
+const songStatus=$('song-status');
+function stopSong(){
+ songPlaying=false;customAudio.pause();customAudio.currentTime=0;
+ songButton.textContent="Play Vahini's song ♫";songButton.setAttribute('aria-pressed','false');
+}
+async function startSong(){
+ try{
+  await customAudio.play();
+  songPlaying=true;songButton.textContent='Stop the song ■';songButton.setAttribute('aria-pressed','true');
+  songStatus.textContent='Now playing Vahini’s birthday song 🎵';
+ }catch(error){
+  songStatus.textContent='Could not play the song. Check that birthday-song.mp3 is beside this page.';
+  console.error('Unable to play the birthday song:',error);
+ }
+}
+songButton.onclick=()=>songPlaying?stopSong():startSong();
+customAudio.onerror=()=>{
+ songStatus.textContent='Could not load birthday-song.wav. Keep it beside birtday.html.';
+ console.error('Could not load the birthday song at birthday-song.wav.');
+};
+// flow
+function go(from,to){$(from).classList.add('hidden');$(to).classList.remove('hidden');scrollTo(0,0)}
+$('open').onclick=$('gift').onclick=()=>{$('gift').classList.add('open');burst(90);rain=true;$('toran').classList.add('on');
+setTimeout(()=>go('s1','s2'),900)};
+$('blow').onclick=()=>{$('cake').classList.add('out');$('blow').style.display='none';burst(160);if(!songPlaying)startSong();
+setTimeout(()=>{burst(120);go('s2','s3');showWish()},2600)};
+let w=0;function showWish(){const d=document.createElement('div');d.className='wish';d.textContent=WISHES[w++];$('wishes').innerHTML='';$('wishes').appendChild(d);burst(40);
+if(w>=WISHES.length){$('next').style.display='none';setTimeout(()=>{$('wishes').innerHTML='';$('end').classList.remove('hidden');burst(220)},2600)}}
+$('next').onclick=showWish;
+$('again').onclick=()=>{w=0;P=[];$('end').classList.add('hidden');$('next').style.display='';$('cake').classList.remove('out');$('blow').style.display='';$('gift').classList.remove('open');go('s3','s1')};
+</script>
+</body>
+</html> 
